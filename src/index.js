@@ -19,7 +19,7 @@ const getCountryMarkup = ({ flags, name, capital, population, languages }) => {
   <img class="img" src = "${flags.svg}" alt = "${
     name.official
   }" width ="70" hight=""50>
-  <h1 >Country: ${name.official}</h1></div>
+  <h1>${name.official}</h1></div>
   <p>Capital: <b>${capital}</b></p>
   <p>Population: <b>${population}</b> </p>
   <p>Languages: <b>${Object.values(languages)}</b></p>
