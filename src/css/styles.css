@@ -19,11 +19,19 @@ body {
   margin-bottom: 16px;
 }
 
+ul {
+  padding: 0;
+  margin: 0;
+}
+
 .country-info {
   margin-bottom: 20px;
 }
 
-p,
+p {
+  margin: 10px 0;
+}
+
 h1 {
   margin: 0;
 }
@@ -45,5 +53,5 @@ h1 {
 .country-list__item {
   list-style-type: none;
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
