@@ -34,19 +34,27 @@ const refs = {
 
 let inputValue = [];
 
+function onResetValue() {
+  refs.countryInfoBox.innerHTML = '';
+  refs.countriesList.innerHTML = '';
+}
+
+function createInterface(ref, elem) {
+  ref.insertAdjacentHTML('beforeend', elem.join(''));
+}
+
 const onSearchInput = e => {
   inputValue = e.target.value.trim();
 
-  if (inputValue === '') {
+  onResetValue();
+
+  if (!inputValue) {
     return;
   }
 
   fetchCountries(inputValue)
     .then(response => {
       if (response.length > 10) {
-        refs.countryInfoBox.innerHTML = '';
-        refs.countriesList.innerHTML = '';
-
         return Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
@@ -57,23 +65,25 @@ const onSearchInput = e => {
 
         refs.countriesList.innerHTML = '';
 
-        return refs.countryInfoBox.insertAdjacentHTML(
-          'beforeend',
-          countryBox.join('')
-        );
+        return createInterface(refs.countryInfoBox, countryBox);
+        // return refs.countryInfoBox.insertAdjacentHTML(
+        //   'beforeend',
+        //   countryBox.join('')
+        // );
       }
 
       const countriesList = response.map(getCountryListMarkup);
 
       refs.countryInfoBox.innerHTML = '';
-      refs.countriesList.insertAdjacentHTML(
-        'beforeend',
-        countriesList.join('')
-      );
+
+      createInterface(refs.countriesList, countriesList);
+      // refs.countriesList.insertAdjacentHTML(
+      //   'beforeend',
+      //   countriesList.join('')
+      // );
     })
     .catch(error => {
-      refs.countryInfoBox.innerHTML = '';
-      refs.countriesList.innerHTML = '';
+      Notify.failure('Oops, there is no country with that name');
     });
 };
 
